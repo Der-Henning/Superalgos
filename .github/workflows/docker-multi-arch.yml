@@ -32,4 +32,4 @@ jobs:
                 --platform=linux/amd64,linux/arm/v7,linux/arm64 \
                 --output "type=image,push=true" \
                 --file ./Docker/Dockerfile . \
-                --tag $(echo "${DOCKER_USERNAME}")/superalgos:latest
+                --tag $(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/superalgos:latest
