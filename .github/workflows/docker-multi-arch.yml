@@ -15,8 +15,12 @@ jobs:
             name: Checkout
             uses: actions/checkout@v1
         -
-            name: Set env
-            run: if [ "${GITHUB_REF#refs/*/}" = "master" ]; then echo "RELEASE_VERSION=latest"; else echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}"; fi >> $GITHUB_ENV
+            name: Set Release Tag
+            run: |
+                if [ "${GITHUB_REF#refs/*/}" = "master" ]; \
+                then echo "RELEASE_TAG=latest"; \
+                else echo "RELEASE_TAG=${GITHUB_REF#refs/*/}"; fi \
+                >> $GITHUB_ENV
         -
             name: Dockerhub login
             env:
@@ -37,4 +41,4 @@ jobs:
                 --platform=linux/amd64,linux/arm/v7,linux/arm64 \
                 --output "type=image,push=true" \
                 --file ./Docker/Dockerfile . \
-                --tag ${{ secrets.DOCKER_USERNAME }}/superalgos:${RELEASE_VERSION}
+                --tag ${{ secrets.DOCKER_USERNAME }}/superalgos:${RELEASE_TAG}
