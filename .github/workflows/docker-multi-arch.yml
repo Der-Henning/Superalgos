@@ -37,5 +37,5 @@ jobs:
                 --platform=linux/amd64,linux/arm/v7,linux/arm64 \
                 --output "type=image,push=true" \
                 --file ./Docker/Dockerfile . \
-                --tag ${RELEASE_VERSION}/superalgos:${RELEASE_VERSION} \
-                --tag ${DOCKER_USERNAME}/superalgos:latest
+                --tag ${{ secrets.DOCKER_USERNAME }}/superalgos:${RELEASE_VERSION} \
+                --tag ${{ secrets.DOCKER_USERNAME }}/superalgos:latest
